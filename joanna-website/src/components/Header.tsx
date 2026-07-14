@@ -4,7 +4,7 @@ function Header() {
   return (
     <header className="sticky top-0 z-50 bg-background border-b">
       <div className="flex h-20 items-center justify-between px-4">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-amber-500">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full border border-black">
           J
         </div>
 
