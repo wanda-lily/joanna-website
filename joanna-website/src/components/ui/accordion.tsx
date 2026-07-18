@@ -49,24 +49,29 @@ function AccordionTrigger({
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         className={cn(
-          "group/accordion-trigger relative flex flex-1 items-start justify-between gap-6 border border-transparent p-4 text-left text-sm font-medium transition-all outline-none hover:underline disabled:pointer-events-none disabled:opacity-50 **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-4 **:data-[slot=accordion-trigger-icon]:text-muted-foreground",
+          "group/accordion-trigger relative flex flex-1 flex-col pb-10 border border-transparent p-4 text-left text-sm font-medium transition-all outline-none hover:underline disabled:pointer-events-none disabled:opacity-50 **:data-[slot=accordion-trigger-icon]:size-4 **:data-[slot=accordion-trigger-icon]:text-muted-foreground",
           className,
         )}
         {...props}
       >
+        {/* Render text or children content normally */}
         {children}
-        <HugeiconsIcon
-          icon={ArrowDownDoubleIcon}
-          strokeWidth={2}
-          data-slot="accordion-trigger-icon"
-          className="pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden"
-        />
-        <HugeiconsIcon
-          icon={ArrowUpDoubleIcon}
-          strokeWidth={2}
-          data-slot="accordion-trigger-icon"
-          className="pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline"
-        />
+
+        {/* Absolutely centered arrow wrapper at the bottom */}
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center justify-center">
+          <HugeiconsIcon
+            icon={ArrowDownDoubleIcon}
+            strokeWidth={2}
+            data-slot="accordion-trigger-icon"
+            className="pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden"
+          />
+          <HugeiconsIcon
+            icon={ArrowUpDoubleIcon}
+            strokeWidth={2}
+            data-slot="accordion-trigger-icon"
+            className="pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline"
+          />
+        </div>
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   )
