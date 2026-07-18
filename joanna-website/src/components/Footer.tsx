@@ -1,14 +1,28 @@
-import { Separator } from "@/components/ui/separator"
+import { HugeiconsIcon } from "@hugeicons/react"
+import {
+  Linkedin02Icon,
+  InstagramIcon,
+  Mail01Icon,
+} from "@hugeicons/core-free-icons"
 
 const currentYear = new Date().getFullYear()
 
 function Footer() {
   return (
-    <div className="flex flex-col gap-2 border-t">
-      <div className="flex h-16 items-center justify-center mt-2">
+    <footer className="flex h-20 items-center justify-between px-4 border-t-2">
+      <div id="copyright" className="flex items-center justify-center mt-2">
         &copy; {currentYear}
       </div>
-    </div>
+
+      <div
+        id="contact"
+        className="flex  items-center justify-center mt-2 gap-2"
+      >
+        <HugeiconsIcon icon={Linkedin02Icon} className="size-6 text-black" />
+        <HugeiconsIcon icon={InstagramIcon} className="size-6 text-black" />
+        <HugeiconsIcon icon={Mail01Icon} className="size-6 text-black" />
+      </div>
+    </footer>
   )
 }
 
