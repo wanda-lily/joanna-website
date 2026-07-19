@@ -16,12 +16,16 @@ enum Section {
   WORK
   TRAVEL
   BOOKS
+  CURRENT
+  TIW
+  RECOMMENDATIONS
 }
 
 
 model Post {
   id        String      @id @default(cuid())
   title     String
+  subtitle  String
   slug      String      @unique
   section   Section
   body      String
@@ -33,6 +37,7 @@ model Post {
 model PostImage {
   id        String   @id @default(cuid())
   url       String
+  altText   String?
   order     Int      @default(0)
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    String
