@@ -18,7 +18,7 @@ export default function AdminDashboard() {
           <CardDescription>Write and publish a new post</CardDescription>
         </CardHeader>
         <div className="px-6 pb-6">
-          <Button asChild>
+          <Button asChild variant="link">
             <Link href="/admin/new">Create</Link>
           </Button>
         </div>
@@ -30,7 +30,7 @@ export default function AdminDashboard() {
           <CardDescription>Edit or delete existing posts</CardDescription>
         </CardHeader>
         <div className="px-6 pb-6">
-          <Button asChild variant="secondary">
+          <Button asChild variant="link">
             <Link href="/admin/posts">View all</Link>
           </Button>
         </div>

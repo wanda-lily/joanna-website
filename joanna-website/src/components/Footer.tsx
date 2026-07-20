@@ -4,6 +4,7 @@ import {
   InstagramIcon,
   Mail01Icon,
 } from "@hugeicons/core-free-icons"
+import { ThemeToggle } from "./theme-toggle"
 
 const currentYear = new Date().getFullYear()
 
@@ -12,6 +13,10 @@ function Footer() {
     <footer className="flex h-20 items-center justify-between px-4 border-t-2">
       <div id="copyright" className="flex items-center justify-center mt-2">
         &copy; {currentYear}
+      </div>
+
+      <div>
+        <ThemeToggle />
       </div>
 
       <div

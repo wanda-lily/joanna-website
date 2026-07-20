@@ -24,7 +24,7 @@ function PostList({ posts = [] }: PostProps) {
   const [api, setApi] = useState<CarouselApi>()
 
   return (
-    <div id="posts" className="p-1 mt-4">
+    <div id="posts" className="max-w-3xl mx-auto p-8 space-y-4">
       <Carousel orientation="vertical" setApi={setApi} className="w-full">
         <CarouselContent>
           {posts.map((item) => (
@@ -38,14 +38,14 @@ function PostList({ posts = [] }: PostProps) {
                       </Link>
                     </Button>
                   </CardTitle>
+                  <CardAction>
+                    <form action={deletePost.bind(null, item.id)}>
+                      <Button variant="destructive" type="submit">
+                        Delete
+                      </Button>
+                    </form>
+                  </CardAction>
                 </CardHeader>
-                <CardAction>
-                  <form action={deletePost.bind(null, item.id)}>
-                    <Button variant="destructive" type="submit">
-                      Delete
-                    </Button>
-                  </form>
-                </CardAction>
               </Card>
             </CarouselItem>
           ))}
