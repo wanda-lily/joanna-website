@@ -11,12 +11,12 @@ const currentYear = new Date().getFullYear()
 function Footer() {
   return (
     <footer className="flex h-20 items-center justify-between px-4 border-t-2">
-      <div id="copyright" className="flex items-center justify-center mt-2">
-        &copy; {currentYear}
-      </div>
-
-      <div>
+      <div
+        id="copyright"
+        className="flex items-center justify-center mt-2 gap-2"
+      >
         <ThemeToggle />
+        &copy; {currentYear}
       </div>
 
       <div

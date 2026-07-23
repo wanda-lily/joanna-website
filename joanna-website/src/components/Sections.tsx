@@ -30,15 +30,15 @@ function Section({ sections }: SectionProps) {
           className="flex flex-col items-center justify-between flex-1 p-6"
         >
           <CardHeader className="flex flex-col items-center gap-2 p-0">
-            <HugeiconsIcon icon={item.icon} className="size-8 text-black" />
+            <HugeiconsIcon icon={item.icon} className="size-8 text-gray-500" />
             <CardTitle>
-              <h2 className="text-center text-black font-semibold text-3xl">
+              <h2 className="text-center text-black font-medium text-3xl">
                 {item.title}
               </h2>
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-0 text-center text-black text-md leading-relaxed">
-            <p className="text-pretty">{item.content}</p>
+          <CardContent className="p-0 text-center text-md leading-relaxed  text-gray-500">
+            <p className="text-pretty text-sm tracking-wide">{item.content}</p>
           </CardContent>
           <CardFooter className="p-0 mt-4">
             <Link href={`/${item.value}`}>
@@ -46,7 +46,7 @@ function Section({ sections }: SectionProps) {
               <HugeiconsIcon
                 icon={ArrowDownDoubleIcon}
                 strokeWidth={2}
-                className="pointer-events-none shrink-0"
+                className="pointer-events-none shrink-0  text-gray-500 h-4 w-4"
               />
             </Link>
           </CardFooter>

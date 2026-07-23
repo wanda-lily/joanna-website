@@ -8,7 +8,7 @@ function Header() {
           <Link href="/">J</Link>
         </div>
 
-        <nav className="flex gap-6">
+        <nav className="flex gap-6 font-medium text-sm">
           <Link href="/">About</Link>
           <Link href="/books">Books</Link>
           <Link href="/travel">Travel</Link>
