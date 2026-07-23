@@ -64,9 +64,9 @@ export default function Home() {
         <div className="relative h-80 w-80 overflow-hidden rounded-full">
           <Image
             src="/joanna.png"
-            alt="cat picture"
+            alt="joanna picture"
             fill
-            sizes="500px"
+            sizes="300px"
             priority
             className="object-cover object-top"
           />
