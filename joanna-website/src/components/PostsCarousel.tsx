@@ -1,98 +1,89 @@
-"use client"
-
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from "@/components/ui/carousel"
-import { useState } from "react"
-import type { CarouselApi } from "@/components/ui/carousel"
-
-import { Post, PostImage } from "@prisma/client"
 import Image from "next/image"
-import { HugeiconsIcon } from "@hugeicons/react"
-import {
-  ArrowLeftDoubleIcon,
-  ArrowRightDoubleIcon,
-} from "@hugeicons/core-free-icons"
+import Link from "next/link"
 
-type PostWithImages = Post & {
+//props
+interface PostImage {
+  id: string
+  url: string
+  order: number
+}
+
+interface Post {
+  id: string
+  title: string
+  subtitle: string | null
+  section: string
   images: PostImage[]
 }
 
-type PostProps = {
-  posts: PostWithImages[]
+interface PostsCarouselProps {
+  posts: Post[]
+  section: string
 }
 
-function PostCarousel({ posts }: PostProps) {
-  const [api, setApi] = useState<CarouselApi>()
+export function PostsCarousel({ posts, section }: PostsCarouselProps) {
   return (
-    <div id="posts" className="p-1 mt-4 ">
-      <Carousel setApi={setApi} className="w-full">
-        <CarouselContent>
-          {posts.map((item) => (
-            <CarouselItem key={item.id}>
-              <Card>
-                <CardHeader>
-                  <CardTitle>{item.title}</CardTitle>
-                </CardHeader>
+    <Carousel
+      id="pictures"
+      opts={{
+        align: "start",
+      }}
+      className="w-full mt-10 relative px-4"
+    >
+      <CarouselContent className="pl-4">
+        {posts.map((item) => (
+          <CarouselItem
+            key={item.id}
+            /* 1 card on tiny screens, 2 on tablet, 3 on desktop layouts */
+            className="basis-full sm:basis-1/2 md:basis-1/3 p-2"
+          >
+            {/*   Link tag pointing to a dedicated post route */}
+            <Link
+              href={`/${section.toLowerCase()}/${item.id}`}
+              className="group block focus:outline-none"
+            >
+              <Card className="overflow-hidden border border-gray-100 shadow-sm transition-all duration-200 group-hover:shadow-md group-hover:border-gray-200 ring-0">
+                <CardContent className="p-3 flex flex-col gap-3 min-h-[360px] max-h-[360px]">
+                  {/* First image */}
+                  {item.images[0] && (
+                    <div className="relative w-full h-48 overflow-hidden rounded-md">
+                      <Image
+                        src={item.images[0].url}
+                        alt={item.title}
+                        fill
+                        sizes="(max-w-768px) 100vw, 33vw"
+                        priority
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </div>
+                  )}
 
-                <CardContent className="flex gap-4 min-h-200 w-screen">
-                  <div className="flex-1">{item.body}</div>
-                  <div className="flex-1 grid grid-cols-2 gap-4">
-                    {item.images.map((image, index) => (
-                      <div
-                        key={image.id}
-                        className={index === 0 ? "col-span-2" : ""}
-                      >
-                        <Image
-                          src={image.url}
-                          alt={item.title}
-                          width={400}
-                          height={300}
-                          className="w-full h-full object-cover rounded-md"
-                        />
-                      </div>
-                    ))}
+                  {/* Subtitle text blocks */}
+                  <div className="flex flex-col gap-1 mt-1">
+                    <h2 className="font-semibold text-base text-black group-hover:text-gray-700 transition-colors line-clamp-1">
+                      {item.title}
+                    </h2>
+                    <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+                      {item.subtitle}
+                    </p>
                   </div>
                 </CardContent>
-
-                <CardFooter>{item.section}</CardFooter>
               </Card>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
+            </Link>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
 
-      <div id="buttons" className="flex justify-center gap-4 mt-4 space-x-6">
-        <Button variant="link" onClick={() => api?.scrollPrev()}>
-          <HugeiconsIcon
-            icon={ArrowLeftDoubleIcon}
-            strokeWidth={2}
-            className="pointer-events-none shrink-0"
-          />
-          Previous
-        </Button>
-
-        <Button variant="link" onClick={() => api?.scrollNext()}>
-          Next
-          <HugeiconsIcon
-            icon={ArrowRightDoubleIcon}
-            strokeWidth={2}
-            className="pointer-events-none shrink-0"
-          />
-        </Button>
-      </div>
-    </div>
+      <CarouselPrevious className="-left-4 lg:-left-12" />
+      <CarouselNext className="-right-4 lg:-right-12" />
+    </Carousel>
   )
 }
-
-export default PostCarousel
