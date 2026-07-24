@@ -2,13 +2,7 @@
 import Image from "next/image"
 import { HugeiconsIcon } from "@hugeicons/react"
 import Section from "../components/Sections"
-import {
-  Heart,
-  Monitor,
-  Globe,
-  Book,
-  ArrowDownDoubleIcon,
-} from "@hugeicons/core-free-icons"
+import { Heart, Monitor, Globe, Book } from "@hugeicons/core-free-icons"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import {
@@ -17,13 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useRef } from "react"
 
 const sections = [
@@ -52,6 +40,7 @@ const sections = [
 
 export default function Home() {
   const accordionRef = useRef<HTMLDivElement>(null)
+  const h2Ref = useRef(null)
   return (
     <div
       id="main"
@@ -97,7 +86,6 @@ export default function Home() {
               className="border-0 shadow-none"
               onValueChange={(value) => {
                 if (value === "about") {
-                  /* FIX 2: Delay slightly increased to let the opening animation complete before calculating layout positions */
                   setTimeout(() => {
                     accordionRef.current?.scrollIntoView({
                       behavior: "smooth",
@@ -110,19 +98,17 @@ export default function Home() {
               <AccordionItem
                 ref={accordionRef}
                 value="about"
-                className="not-last:border-b data-[state=open]:bg-card mx-5 scroll-mt-6 mt-10"
+                className="not-last:border-b data-[state=open]:bg-card mx-5 scroll-mt-26 mt-10"
               >
-                <AccordionTrigger className="mt-0 py-0 text-gray-500 hover:text-black transition-colors"></AccordionTrigger>
-
+                <AccordionTrigger className="mt-0 py-0 text-gray-500 hover:text-black transition-colors cursor-pointer"></AccordionTrigger>
                 <AccordionContent className="overflow-hidden text-black text-[15px]">
-                  <div className="flex flex-col items-center pb-2">
-                    <h2 className=" mt-20 text-center text-3xl mb-5">
+                  <div className="flex flex-col items-center justify-start h-auto w-full pb-4">
+                    <h2 className="pt-8 text-center text-3xl mb-4">
                       Somewhere in between
                     </h2>
 
-                    {/* FIX 5: Standardized content layout properties to keep block copy centered and readable instead of spreading out */}
-                    <div className="mx-auto w-full max-w-xl space-y-4 text-left tracking-wide pb-4">
-                      <p className="mb-10">
+                    <div className="mx-auto w-full max-w-xl space-y-4 text-left tracking-wide pb-4 px-4">
+                      <p>
                         I spend a lot of my life somewhere in between things.
                         Between books and boarding gates. Between creative ideas
                         and the systems that bring them to life. Between
@@ -136,7 +122,6 @@ export default function Home() {
                         FaceTime with a friend, and far too much time planning
                         where to travel next.
                       </p>
-
                       <p>
                         Professionally, I build things for the internet. Over
                         the last few years, I've worked on digital campaigns and
