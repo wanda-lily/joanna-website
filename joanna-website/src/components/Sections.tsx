@@ -23,11 +23,14 @@ type SectionProps = {
 function Section({ sections }: SectionProps) {
   return (
     // Main container wrapping all cards. Grid makes them sit nicely side-by-side.
-    <div id="section" className="flex justify-evenly gap-10 mx-10">
+    <div
+      id="section"
+      className="flex flex-col md:flex-row justify-evenly gap-10 mx-10 md:mx-10"
+    >
       {sections.map((item) => (
         <Card
           key={item.value}
-          className="flex flex-col items-center justify-between flex-1 p-6"
+          className="flex flex-col items-center justify-between flex-1 p-6 basis-full sm:basis-1/2 md:basis-1/3"
         >
           <CardHeader className="flex flex-col items-center gap-2 p-0">
             <HugeiconsIcon icon={item.icon} className="size-8 text-gray-500" />
