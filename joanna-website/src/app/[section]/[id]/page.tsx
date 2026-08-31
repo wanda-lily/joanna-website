@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma"
+import { getPrisma } from "@/lib/prisma"
 import { notFound } from "next/navigation"
 import SinglePostLayout from "./SinglePostLayout"
 
@@ -8,6 +8,8 @@ interface PageProps {
     id: string
   }>
 }
+
+const prisma = await getPrisma()
 
 export default async function DynamicPostPage({ params }: PageProps) {
   const { id, section } = await params

@@ -1,7 +1,8 @@
-import { prisma } from "@/lib/prisma"
+import { getPrisma } from "@/lib/prisma"
 import { notFound } from "next/navigation"
 import { EditPostForm } from "./edit-form"
 
+const prisma = await getPrisma()
 export default async function EditPostPage({
   params,
 }: {

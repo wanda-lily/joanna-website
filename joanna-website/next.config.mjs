@@ -4,6 +4,7 @@ const nextConfig = {
   reactCompiler: true,
   allowedDevOrigins: ["172.20.10.3", "localhost:3000"],
   images: {
+    unoptimized: true, // NEW — Vercel's image optimizer isn't available on Workers
     remotePatterns: [
       {
         protocol: "https",

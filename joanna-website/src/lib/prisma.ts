@@ -1,20 +1,9 @@
-import { PrismaClient } from "@prisma/client"
-import { Pool } from "pg"
-import { PrismaPg } from "@prisma/adapter-pg"
+import { PrismaClient } from "@/generated/prisma"
+import { PrismaD1 } from "@prisma/adapter-d1"
+import { getCloudflareContext } from "@opennextjs/cloudflare"
 
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined
-}
-
-// 1. Establish the connection pool using your environment variable
-const pool = new Pool({ connectionString: process.env.DATABASE_URL })
-
-// 2. Instantiate the Prisma adapter wrapper
-const adapter = new PrismaPg(pool)
-
-// 3. Construct PrismaClient by explicitly injecting the adapter
-export const prisma = globalForPrisma.prisma ?? new PrismaClient({ adapter })
-
-if (process.env.NODE_ENV !== "production") {
-  globalForPrisma.prisma = prisma
+export async function getPrisma() {
+  const { env } = await getCloudflareContext({ async: true })
+  const adapter = new PrismaD1(env.DB)
+  return new PrismaClient({ adapter })
 }

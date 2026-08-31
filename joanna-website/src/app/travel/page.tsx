@@ -1,6 +1,7 @@
-import { prisma } from "@/lib/prisma"
+import { getPrisma } from "@/lib/prisma"
 import { PostsCarousel } from "@/components/PostsCarousel"
 
+const prisma = await getPrisma()
 async function TravelPost() {
   const posts = await prisma.post.findMany({
     where: {

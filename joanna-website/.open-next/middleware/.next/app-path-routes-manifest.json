@@ -1,0 +1,19 @@
+{
+  "/[section]/[id]/page": "/[section]/[id]",
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/admin/edit/[slug]/page": "/admin/edit/[slug]",
+  "/admin/new/page": "/admin/new",
+  "/admin/page": "/admin",
+  "/admin/posts/page": "/admin/posts",
+  "/api/uploadthing/route": "/api/uploadthing",
+  "/books/page": "/books",
+  "/current/page": "/current",
+  "/page": "/",
+  "/recommendations/page": "/recommendations",
+  "/sign-in/[[...sign-in]]/page": "/sign-in/[[...sign-in]]",
+  "/sign-up/[[...sign-up]]/page": "/sign-up/[[...sign-up]]",
+  "/tiw/page": "/tiw",
+  "/travel/page": "/travel",
+  "/work/page": "/work"
+}

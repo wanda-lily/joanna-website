@@ -1,10 +1,11 @@
 "use server"
 
-import { prisma } from "./prisma"
+import { getPrisma } from "@/lib/prisma"
 import { Section } from "@prisma/client"
 import { auth } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
 
+const prisma = await getPrisma()
 export async function createPost(formData: FormData) {
   const { userId } = await auth()
   if (!userId) throw new Error("Unauthorized")

@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "joanna-website",
+  "compatibility_date": "2026-08-20",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": ".open-next/worker.js", // OpenNext output
+  "assets": {
+    "directory": ".open-next/assets",
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "joanna-blog-db",
+      "database_id": "450efcd9-e136-4d1c-b6f3-2a05ab51258e",
+    },
+  ],
+}

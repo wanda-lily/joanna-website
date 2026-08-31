@@ -1,0 +1,19 @@
+{
+  "/[section]/[id]/page": "app/[section]/[id]/page.js",
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/admin/edit/[slug]/page": "app/admin/edit/[slug]/page.js",
+  "/admin/new/page": "app/admin/new/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/admin/posts/page": "app/admin/posts/page.js",
+  "/api/uploadthing/route": "app/api/uploadthing/route.js",
+  "/books/page": "app/books/page.js",
+  "/current/page": "app/current/page.js",
+  "/page": "app/page.js",
+  "/recommendations/page": "app/recommendations/page.js",
+  "/sign-in/[[...sign-in]]/page": "app/sign-in/[[...sign-in]]/page.js",
+  "/sign-up/[[...sign-up]]/page": "app/sign-up/[[...sign-up]]/page.js",
+  "/tiw/page": "app/tiw/page.js",
+  "/travel/page": "app/travel/page.js",
+  "/work/page": "app/work/page.js"
+}
