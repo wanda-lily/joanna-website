@@ -11,12 +11,14 @@
 !.yarn/versions
 
 .wrangler/
+/.wrangler/
 
 # testing
 /coverage
 
 # next.js
 /.next/
+/.open-next/
 /out/
 /next-env.mjs
 **/next-env.mjs
