@@ -19,14 +19,13 @@ export function ThemeToggle() {
   return (
     <Button
       aria-label="Toggle Theme"
-      variant="outline"
-      className="rounded-full"
+      variant="ghost"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       {theme === "dark" ? (
-        <HugeiconsIcon icon={Sun03Icon} className="size-5" />
+        <HugeiconsIcon icon={Sun03Icon} className="size-4" />
       ) : (
-        <HugeiconsIcon icon={Moon02Icon} className="size-5" />
+        <HugeiconsIcon icon={Moon02Icon} className="size-4" />
       )}
     </Button>
   )

@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import Link from "next/link"
+import { Button } from "./ui/button"
 
 type SectionItem = {
   value: string
@@ -25,34 +26,32 @@ function Section({ sections }: SectionProps) {
     // Main container wrapping all cards. Grid makes them sit nicely side-by-side.
     <div
       id="section"
-      className="flex flex-col md:flex-row justify-evenly gap-10 mx-10 md:mx-10"
+      className="flex flex-col md:flex-row justify-evenly gap-space-lg mx-space-lg"
     >
       {sections.map((item) => (
         <Card
           key={item.value}
-          className="flex flex-col items-center justify-between flex-1 p-6 basis-full sm:basis-1/2 md:basis-1/3"
+          className="flex flex-col items-center flex-1 p-space-md basis-full sm:basis-1/2 md:basis-1/3"
         >
-          <CardHeader className="flex flex-col items-center gap-2 p-0">
-            <HugeiconsIcon icon={item.icon} className="size-8 text-gray-500" />
+          <CardHeader className="flex flex-col items-center gap-space-sm p-0">
+            <HugeiconsIcon
+              icon={item.icon}
+              className="h-8 w-8 text-muted-foreground"
+            />
             <CardTitle>
-              <h2 className="text-center text-black font-medium text-3xl">
-                {item.title}
-              </h2>
+              <Button variant="link">
+                <Link href={`/${item.value}`} aria-label={`View ${item.title}`}>
+                  {" "}
+                  {item.title}
+                </Link>
+              </Button>
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-0 text-center text-md leading-relaxed  text-gray-500">
-            <p className="text-pretty text-sm tracking-wide">{item.content}</p>
+          <CardContent className="p-0 text-left text-body leading-relaxed text-muted-foreground">
+            <p className="text-pretty text-caption tracking-wide">
+              {item.content}
+            </p>
           </CardContent>
-          <CardFooter className="p-0 mt-4">
-            <Link href={`/${item.value}`}>
-              {" "}
-              <HugeiconsIcon
-                icon={ArrowDownDoubleIcon}
-                strokeWidth={2}
-                className="pointer-events-none shrink-0  text-gray-500 h-4 w-4"
-              />
-            </Link>
-          </CardFooter>
         </Card>
       ))}
     </div>
