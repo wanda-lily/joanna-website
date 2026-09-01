@@ -46,9 +46,37 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Register Spacing scale tokens */
+  --spacing-space-xs: var(--space-xs);
+  --spacing-space-sm: var(--space-sm);
+  --spacing-space-md: var(--space-md);
+  --spacing-space-lg: var(--space-lg);
+  --spacing-space-xl: var(--space-xl);
+
+  /* Register Typography scale tokens */
+  --font-size-caption: var(--text-caption);
+  --font-size-body: var(--text-body);
+  --font-size-h3: var(--text-h3);
+  --font-size-h2: var(--text-h2);
+  --font-size-h1: var(--text-h1);
 }
 
 :root {
+  /* Spacing Scale Definitions */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 48px;
+
+  /* Font Size Scale Definitions */
+  --text-caption: 12px;
+  --text-body: 16px;
+  --text-h3: 21px;
+  --text-h2: 28px;
+  --text-h1: 37px;
+
   --background: #faf9f3;
   --foreground: oklch(0.145 0 0);
   --card: #f6f2e9;

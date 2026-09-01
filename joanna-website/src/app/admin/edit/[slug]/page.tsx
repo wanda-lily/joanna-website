@@ -1,3 +1,6 @@
+//tells Next.js "never try to prerender or analyze this at build time — always render it fresh per-request.
+export const dynamic = "force-dynamic"
+
 import { getPrisma } from "@/lib/prisma"
 import { notFound } from "next/navigation"
 import { EditPostForm } from "./edit-form"

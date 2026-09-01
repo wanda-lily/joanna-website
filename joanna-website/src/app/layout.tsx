@@ -5,6 +5,7 @@ import "./globals.css"
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
 import { ClerkProvider } from "@clerk/nextjs"
+import { ThemeProvider } from "@/components/theme-provider"
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -28,13 +29,26 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en" className={`${roboto.variable} ${robotoMono.variable}`}>
+      {/* suppressHydrationWarning stops browser extensions from causing error flashes
+       */}
+      <html
+        lang="en"
+        suppressHydrationWarning
+        className={`${roboto.variable} ${robotoMono.variable}`}
+      >
         <body className="min-h-screen flex flex-col overflow-x-hidden">
-          <Header />
-          <main id="root-body" className="flex-1 ">
-            {children}
-          </main>
-          <Footer />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system" // Reads user's OS preference automatically
+            enableSystem
+            disableTransitionOnChange // Prevents layout pop/flash during rapid shifts
+          >
+            <Header />
+            <main id="root-body" className="flex-1 ">
+              {children}
+            </main>
+            <Footer />
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
