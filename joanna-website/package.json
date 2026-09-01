@@ -10,7 +10,8 @@
     "postinstall": "prisma generate",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "prepare": "husky"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.5.17",
@@ -37,6 +38,7 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20260831.1",
     "@opennextjs/cloudflare": "^1.20.5",
+    "@secretlint/secretlint-rule-preset-recommend": "^13.0.5",
     "@tailwindcss/postcss": "^4",
     "@types/node": "26.1.1",
     "@types/pg": "^8.20.0",
@@ -45,7 +47,9 @@
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
+    "husky": "^9.1.7",
     "prisma": "^7.8.0",
+    "secretlint": "^13.0.5",
     "tailwindcss": "^4",
     "wrangler": "^4.127.1"
   }

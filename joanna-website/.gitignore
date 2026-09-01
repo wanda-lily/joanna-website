@@ -10,6 +10,8 @@
 !.yarn/releases
 !.yarn/versions
 
+.wrangler/
+
 # testing
 /coverage
 
@@ -20,7 +22,8 @@
 **/next-env.mjs
 next-env.d.ts
 **/.open-next/
-
+.next/
+.open-next/
 
 # production
 /build
