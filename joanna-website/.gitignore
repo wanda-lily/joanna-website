@@ -19,6 +19,8 @@
 /next-env.mjs
 **/next-env.mjs
 next-env.d.ts
+**/.open-next/
+
 
 # production
 /build
