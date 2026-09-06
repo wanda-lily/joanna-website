@@ -6,6 +6,7 @@ import Footer from "@/components/Footer"
 import Header from "@/components/Header"
 import { ClerkProvider } from "@clerk/nextjs"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/sonner"
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -49,6 +50,7 @@ export default function RootLayout({
             </main>
             <Footer />
           </ThemeProvider>
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

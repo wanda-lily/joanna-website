@@ -30,6 +30,13 @@ interface PostsCarouselProps {
 }
 
 export function PostsCarousel({ posts, section }: PostsCarouselProps) {
+  if (posts.length < 1) {
+    return (
+      <Card className="mx-auto mt-10 flex h-40 w-140 items-center justify-center border-2 border-border/50 bg-card/60 text-sm text-muted-foreground">
+        <p>No {section} posts available.</p>
+      </Card>
+    )
+  }
   return (
     <Carousel
       id="pictures"
@@ -50,30 +57,29 @@ export function PostsCarousel({ posts, section }: PostsCarouselProps) {
               href={`/${section.toLowerCase()}/${item.id}`}
               className="group block focus:outline-none"
             >
-              <Card className="overflow-hidden border border-gray-100 shadow-sm transition-all duration-200 group-hover:shadow-md group-hover:border-gray-200 ring-0">
-                <CardContent className="p-3 flex flex-col gap-3 min-h-[360px] max-h-[360px]">
+              <Card className="pt-0! mt-0! h-[430px] overflow-hidden border-border/50 bg-card/60 shadow-none transition-colors duration-300  hover:bg-card hover:-translate-y-0.5">
+                <CardContent className="flex h-full flex-col p-0">
                   {/* First image */}
                   {item.images[0] && (
-                    <div className="relative w-full h-48 overflow-hidden rounded-md">
+                    <div className="relative w-full h-[300px] shrink-0 overflow-hidden rounded-t-lg bg-muted">
                       <Image
                         src={item.images[0].url}
                         alt={item.title}
                         fill
-                        sizes="(max-w-768px) 100vw, 33vw"
+                        sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 33vw"
                         priority
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                       />
                     </div>
                   )}
 
                   {/* Subtitle text blocks */}
-                  <div className="flex flex-col gap-1 mt-1">
-                    <h2 className="font-semibold text-base text-black group-hover:text-gray-700 transition-colors line-clamp-1">
-                      {item.title}
-                    </h2>
-                    <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
-                      {item.subtitle}
-                    </p>
+                  <div className="flex min-h-0 flex-1 flex-col px-space-lg pb-space-lg  pt-space-md text-center">
+                    <div className="border-t border-border/50 pt-space-md">
+                      <h2 className=" text-base font-medium  line-clamp-2 tracking-tight text-foreground/80 transition-colors duration-200 group-hover:text-foreground">
+                        {item.title}
+                      </h2>
+                    </div>
                   </div>
                 </CardContent>
               </Card>

@@ -10,7 +10,7 @@ import {
 export default function AdminDashboard() {
   return (
     <div className="max-w-xl mx-auto p-8 space-y-4">
-      <h1 className="text-2xl font-semibold mb-6">Admin</h1>
+      <h1 className="text-h3 font-semibold mb-6">Admin</h1>
 
       <Card>
         <CardHeader>

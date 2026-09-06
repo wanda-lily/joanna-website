@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Button } from "./ui/button"
 
 const navItems = [
-  { href: "/", label: "About" },
+  { href: "/#about", label: "About" },
   { href: "/books", label: "Books" },
   { href: "/travel", label: "Travel" },
   { href: "/work", label: "Work" },
@@ -10,7 +10,7 @@ const navItems = [
 
 function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-border/40 bg-background">
+    <header className="sticky top-0 z-50 border-b border-border bg-background">
       <div className="flex h-14 items-center justify-between px-space-md">
         <Link
           href="/"

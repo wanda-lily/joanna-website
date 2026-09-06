@@ -35,13 +35,13 @@ export default function SinglePostLayout({
   const sectionSlug = post.section.toLowerCase()
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 flex flex-col items-center">
+    <div className="w-full max-w-6xl mx-auto p-4 flex flex-col items-center">
       <Card className="w-full bg-transparent border-0 shadow-none ring-0">
         <CardHeader className="text-center">
-          <CardTitle className="text-4xl font-bold tracking-tight mb-2">
+          <CardTitle className="text-h2 font-bold tracking-tight mb-2">
             {post.title}
           </CardTitle>
-          <p className="text-sm text-muted-foreground uppercase tracking-wider">
+          <p className="text-body text-muted-foreground uppercase tracking-wider">
             {post.section}
           </p>
         </CardHeader>
@@ -49,7 +49,7 @@ export default function SinglePostLayout({
         {/* Layout container optimized for responsiveness */}
         <CardContent className="flex flex-col md:flex-row gap-8 mt-6 items-start">
           {/* Left Column: Post Body Content Text */}
-          <div className="flex-1 text-base text-pretty text-gray-800 leading-relaxed text-left tracking-wide whitespace-pre-line">
+          <div className="flex-1 text-body text-pretty text-gray-800 leading-relaxed text-left tracking-wide whitespace-pre-line">
             {post.body}
           </div>
 
@@ -84,7 +84,7 @@ export default function SinglePostLayout({
       >
         {/* Previous Button Link Element */}
         {prevId ? (
-          <Link href={`/${sectionSlug}/${prevId}`} passHref legacyBehavior>
+          <Link href={`/${sectionSlug}/${prevId}`} passHref>
             <Button
               variant="link"
               className="gap-2 text-gray-600 hover:text-black transition-colors"
@@ -110,7 +110,7 @@ export default function SinglePostLayout({
 
         {/* Next Button Link Element */}
         {nextId ? (
-          <Link href={`/${sectionSlug}/${nextId}`} passHref legacyBehavior>
+          <Link href={`/${sectionSlug}/${nextId}`} passHref>
             <Button
               variant="link"
               className="gap-2 text-gray-600 hover:text-black transition-colors"

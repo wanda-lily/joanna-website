@@ -52,14 +52,15 @@
   --spacing-space-sm: var(--space-sm);
   --spacing-space-md: var(--space-md);
   --spacing-space-lg: var(--space-lg);
-  --spacing-space-xl: var(--space-xl);
+  --spacing-space-2xl: var(--space-2xl);
+  --spacing-space-3xl: var(--space-3xl);
 
   /* Register Typography scale tokens */
-  --font-size-caption: var(--text-caption);
-  --font-size-body: var(--text-body);
-  --font-size-h3: var(--text-h3);
-  --font-size-h2: var(--text-h2);
-  --font-size-h1: var(--text-h1);
+  --text-caption: var(--type-caption);
+  --text-body: var(--type-body);
+  --text-h3: var(--type-h3);
+  --text-h2: var(--type-h2);
+  --text-h1: var(--type-h1);
 }
 
 :root {
@@ -67,15 +68,31 @@
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 48px;
+  --space-lg: 32px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
 
   /* Font Size Scale Definitions */
-  --text-caption: 12px;
-  --text-body: 16px;
-  --text-h3: 21px;
-  --text-h2: 28px;
-  --text-h1: 37px;
+  --type-caption: 0.75rem;
+  --type-body: 1rem;
+  --type-h3: clamp(1.25rem, 1.1rem + 0.4vw, 0.5rem);
+  --type-h2: clamp(1.75rem, 1.5rem + 1vw, 1rem);
+  --type-h1: clamp(2.25rem, 1.8rem + 2.5vw, 2rem);
+
+  /*Line Height definition */
+  --leading-tight: 1.1;
+  --leading-heading: 1.2;
+  --leading-body: 1.65;
+  --leading-relaxed: 1.8;
+
+  /* Motion */
+
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
 
   --background: #faf9f3;
   --foreground: oklch(0.145 0 0);

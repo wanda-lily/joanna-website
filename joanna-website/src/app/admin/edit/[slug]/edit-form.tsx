@@ -1,10 +1,14 @@
 "use client"
 
-import { useState } from "react"
+import { useActionState, useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+
 import { updatePost } from "@/lib/actions"
+
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { toast } from "sonner"
 import {
   Select,
   SelectTrigger,
@@ -12,6 +16,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select"
+
 import type { Post, PostImage, Section } from "@prisma/client"
 
 export function EditPostForm({
@@ -20,18 +25,42 @@ export function EditPostForm({
   post: Post & { images: PostImage[] }
 }) {
   const [section, setSection] = useState<Section>(post.section)
+
+  const router = useRouter()
+
   const updatePostWithId = updatePost.bind(null, post.id)
 
+  const [state, formAction, pending] = useActionState(updatePostWithId, null)
+
+  useEffect(() => {
+    if (!state) return
+
+    if (state.success) {
+      toast.success("Changes saved", {
+        description: "Your post has been updated successfully.",
+      })
+
+      router.push(`/${state.section.toLowerCase()}/${state.postId}`)
+    } else {
+      toast.error("Save failed", {
+        description: state.error,
+      })
+    }
+  }, [state, router, toast])
+
   return (
-    <form action={updatePostWithId} className="max-w-2xl mx-auto space-y-4 p-8">
+    <form action={formAction} className="max-w-2xl mx-auto space-y-4 p-8">
       <Input name="title" defaultValue={post.title} required />
+
       <Input name="subtitle" defaultValue={post.subtitle} />
 
       <input type="hidden" name="section" value={section} />
+
       <Select value={section} onValueChange={(v) => setSection(v as Section)}>
         <SelectTrigger>
           <SelectValue />
         </SelectTrigger>
+
         <SelectContent>
           <SelectItem value="WORK">Work</SelectItem>
           <SelectItem value="TRAVEL">Travel</SelectItem>
@@ -44,24 +73,11 @@ export function EditPostForm({
 
       <Textarea name="body" defaultValue={post.body} required rows={20} />
 
-      <div>
-        <p className="text-sm text-gray-500 mb-2">
-          Current images ({post.images.length}). Uploading new ones will replace
-          them.
-        </p>
-        <div className="flex gap-2 mb-4">
-          {post.images.map((img) => (
-            <img
-              key={img.id}
-              src={img.url}
-              className="w-16 h-16 object-cover rounded"
-            />
-          ))}
-        </div>
-        {/* reuse your existing ImageUploadFields component here */}
-      </div>
+      {/* Images go here */}
 
-      <Button type="submit">Save changes</Button>
+      <Button type="submit" disabled={pending}>
+        {pending ? "Saving..." : "Save changes"}
+      </Button>
     </form>
   )
 }
