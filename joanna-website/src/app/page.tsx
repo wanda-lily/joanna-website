@@ -190,7 +190,7 @@ export default function Home() {
 
       <Section sections={sections} />
 
-      <div className="flex flex-col  justify-center items-center gap-space-sm  pb-space-sm border-t border-border/40 pt-space-lg">
+      <div className="flex flex-col  justify-center items-center gap-space-sm  pb-space-lg mt-space-lg border-border/40 pt-space-lg">
         {links.map((link) => (
           <Link href={link.href} key={link.value} passHref>
             <Button variant="link" className=" text-sm font-medium">

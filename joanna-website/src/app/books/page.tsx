@@ -1,8 +1,10 @@
+export const dynamic = "force-dynamic"
+
 import { getPrisma } from "@/lib/prisma"
 import { PostsCarousel } from "@/components/PostsCarousel"
 
-const prisma = await getPrisma()
 async function BooksPage() {
+  const prisma = await getPrisma()
   const posts = await prisma.post.findMany({
     where: {
       section: "BOOKS",

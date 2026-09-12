@@ -60,7 +60,7 @@ export default function SinglePostLayout({
                 key={image.id}
                 /* First image spans across both columns, subsequent ones sit side-by-side */
                 className={`relative overflow-hidden rounded-md bg-muted ${
-                  index === 0 ? "col-span-2 h-80" : "col-span-1 h-44"
+                  index === 0 ? "col-span-2 h-200" : "col-span-1 h-100"
                 }`}
               >
                 <Image

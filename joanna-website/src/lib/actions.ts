@@ -10,6 +10,7 @@ const prisma = await getPrisma()
 const utapi = new UTApi()
 
 export type PostActionState =
+  | null
   | {
       success: true
       section: Section
@@ -19,12 +20,23 @@ export type PostActionState =
       success: false
       error: string
     }
+
+export type CreatePostActionState =
   | null
+  | {
+      success: true
+      section: Section
+      slug: string
+    }
+  | {
+      success: false
+      error: string
+    }
 
 export async function createPost(
-  _prevState: PostActionState,
+  _prevState: CreatePostActionState,
   formData: FormData,
-): Promise<PostActionState & { slug?: string }> {
+): Promise<CreatePostActionState & { slug?: string }> {
   const { userId } = await auth()
 
   if (!userId) {

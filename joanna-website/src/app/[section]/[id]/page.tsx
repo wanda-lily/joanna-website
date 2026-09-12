@@ -9,9 +9,8 @@ interface PageProps {
   }>
 }
 
-const prisma = await getPrisma()
-
 export default async function DynamicPostPage({ params }: PageProps) {
+  const prisma = await getPrisma()
   const { id, section } = await params
   const upperSection = section.toUpperCase()
 
