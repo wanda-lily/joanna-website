@@ -40,7 +40,7 @@ export function EditPostForm({
         description: "Your post has been updated successfully.",
       })
 
-      router.push(`/${state.section.toLowerCase()}/${state.postId}`)
+      router.push(`/admin`)
     } else {
       toast.error("Save failed", {
         description: state.error,

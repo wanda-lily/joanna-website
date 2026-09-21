@@ -29,7 +29,7 @@ function PostList({ posts = [] }: PostProps) {
         <CarouselContent>
           {posts.map((item) => (
             <CarouselItem key={item.id}>
-              <Card>
+              <Card className="rounded-md!">
                 <CardHeader>
                   <CardTitle>
                     <Button variant="link" asChild>

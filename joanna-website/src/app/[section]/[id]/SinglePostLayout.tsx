@@ -16,6 +16,7 @@ import {
   ArrowRightDoubleIcon,
 } from "@hugeicons/core-free-icons"
 import { Post, PostImage } from "@prisma/client"
+import Header from "@/components/Header"
 
 type PostWithImages = Post & {
   images: PostImage[]
@@ -35,19 +36,16 @@ export default function SinglePostLayout({
   const sectionSlug = post.section.toLowerCase()
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-4 flex flex-col items-center">
+    <div className="w-full max-w-4xl mx-auto flex flex-col items-center">
       <Card className="w-full bg-transparent border-0 shadow-none ring-0">
         <CardHeader className="text-center">
           <CardTitle className="text-h2 font-bold tracking-tight mb-2">
-            {post.title}
+            <Header section={post.title} />
           </CardTitle>
-          <p className="text-body text-muted-foreground uppercase tracking-wider">
-            {post.section}
-          </p>
         </CardHeader>
 
         {/* Layout container optimized for responsiveness */}
-        <CardContent className="flex flex-col md:flex-row gap-8 mt-6 items-start">
+        <CardContent className="flex flex-col md:flex-row gap-8 mt-4 items-start">
           {/* Left Column: Post Body Content Text */}
           <div className="flex-1 text-body text-pretty text-gray-800 leading-relaxed text-left tracking-wide whitespace-pre-line">
             {post.body}

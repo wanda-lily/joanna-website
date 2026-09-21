@@ -8,7 +8,7 @@ const navItems = [
   { href: "/work", label: "Work" },
 ]
 
-function Header() {
+function Header(props) {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background">
       <div className="flex h-14 items-center justify-between px-space-md">
@@ -20,13 +20,17 @@ function Header() {
           J
         </Link>
 
-        <nav className="flex gap-space-md font-medium text-caption text-muted-foreground ">
+        <h2 className="text-body font-medium tracking-tight">
+          {props.section}
+        </h2>
+
+        {/* <nav className="flex gap-space-md font-medium text-caption text-muted-foreground ">
           {navItems.map(({ href, label }) => (
             <Button key={href} variant="ghost" asChild>
               <Link href={href}>{label}</Link>
             </Button>
           ))}
-        </nav>
+        </nav> */}
       </div>
     </header>
   )

@@ -4,6 +4,7 @@ export const dynamic = "force-dynamic"
 import { getPrisma } from "@/lib/prisma"
 import { notFound } from "next/navigation"
 import { EditPostForm } from "./edit-form"
+import Header from "@/components/Header"
 
 const prisma = await getPrisma()
 export default async function EditPostPage({
@@ -19,5 +20,10 @@ export default async function EditPostPage({
 
   if (!post) notFound()
 
-  return <EditPostForm post={post} />
+  return (
+    <section className="min-h-dvh max-w-4xl mx-auto">
+      <Header section={"Edit"} />
+      <EditPostForm post={post} />
+    </section>
+  )
 }

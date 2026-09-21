@@ -1,3 +1,4 @@
+import "server-only"
 import { PrismaClient } from "@/generated/prisma/client"
 import { PrismaD1 } from "@prisma/adapter-d1"
 import { getCloudflareContext } from "@opennextjs/cloudflare"

@@ -34,11 +34,6 @@ export default async function AdminLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const { userId } = await auth()
-  if (userId !== process.env.ADMIN_USER_ID) {
-    redirect("/sign-in")
-  }
-
   return (
     <div className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
       <ClerkProvider>

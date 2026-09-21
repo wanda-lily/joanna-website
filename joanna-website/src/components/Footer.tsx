@@ -11,7 +11,7 @@ const currentYear = new Date().getFullYear()
 
 function Footer() {
   return (
-    <footer className="w-full border-t border-border  mt-auto">
+    <footer className="w-full max-w-4xl mx-auto border-t border-border  mt-auto">
       <div className=" h-14 mx-auto px-space-md flex flex-col sm:flex-row justify-between items-center gap-space-md">
         <div
           id="copyright"

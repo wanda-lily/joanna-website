@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { ImageUploadFields } from "@/components/ImageUpload"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import Header from "@/components/Header"
 import {
   Select,
   SelectTrigger,
@@ -28,7 +29,7 @@ export default function NewPostPage() {
         description: "Your post has been published successfully.",
       })
 
-      router.push(`/${state.section.toLowerCase()}/${state.slug}`)
+      router.push(`/admin`)
     } else {
       toast.error("Publishing failed", {
         description: state.error,
@@ -37,41 +38,44 @@ export default function NewPostPage() {
   }, [state, router, toast])
 
   return (
-    <form action={formAction} className="max-w-7xl mx-auto space-y-4 p-8">
-      <Input name="title" placeholder="Title" required />
+    <section className="min-h-dvh max-w-4xl mx-auto">
+      <Header section={"New"} />
+      <form action={formAction} className="max-w-7xl mx-auto space-y-4 p-8">
+        <Input name="title" placeholder="Title" required />
 
-      <Input name="subtitle" placeholder="Subtitle" />
+        <Input name="subtitle" placeholder="Subtitle" />
 
-      <input type="hidden" name="section" value={section} />
+        <input type="hidden" name="section" value={section} />
 
-      <Select onValueChange={setSection} required>
-        <SelectTrigger>
-          <SelectValue placeholder="Choose a section" />
-        </SelectTrigger>
+        <Select onValueChange={setSection} required>
+          <SelectTrigger>
+            <SelectValue placeholder="Choose a section" />
+          </SelectTrigger>
 
-        <SelectContent>
-          <SelectItem value="WORK">Work</SelectItem>
-          <SelectItem value="TRAVEL">Travel</SelectItem>
-          <SelectItem value="BOOKS">Books</SelectItem>
-          <SelectItem value="TIW">Things I wrote</SelectItem>
-          <SelectItem value="CURRENT">Currently</SelectItem>
-          <SelectItem value="RECOMMENDATIONS">Recommendations</SelectItem>
-        </SelectContent>
-      </Select>
+          <SelectContent>
+            <SelectItem value="WORK">Work</SelectItem>
+            <SelectItem value="TRAVEL">Travel</SelectItem>
+            <SelectItem value="BOOKS">Books</SelectItem>
+            <SelectItem value="TIW">Things I wrote</SelectItem>
+            <SelectItem value="CURRENT">Currently</SelectItem>
+            <SelectItem value="RECOMMENDATIONS">Recommendations</SelectItem>
+          </SelectContent>
+        </Select>
 
-      <Textarea
-        name="body"
-        className="min-h-125"
-        placeholder="Write something..."
-        required
-        rows={50}
-      />
+        <Textarea
+          name="body"
+          className="min-h-125"
+          placeholder="Write something..."
+          required
+          rows={50}
+        />
 
-      <ImageUploadFields />
+        <ImageUploadFields />
 
-      <Button type="submit" disabled={pending}>
-        {pending ? "Publishing..." : "Publish"}
-      </Button>
-    </form>
+        <Button type="submit" disabled={pending}>
+          {pending ? "Publishing..." : "Publish"}
+        </Button>
+      </form>
+    </section>
   )
 }

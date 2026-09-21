@@ -1,5 +1,6 @@
 import { getPrisma } from "@/lib/prisma"
 import PostList from "./post-list"
+import Header from "@/components/Header"
 
 const prisma = await getPrisma()
 export default async function AdminPostsPage() {
@@ -7,5 +8,10 @@ export default async function AdminPostsPage() {
     orderBy: { createdAt: "desc" },
   })
 
-  return <PostList posts={posts} />
+  return (
+    <section className="min-h-dvh max-w-4xl mx-auto">
+      <Header section={"Edit"} />
+      <PostList posts={posts} />
+    </section>
+  )
 }
