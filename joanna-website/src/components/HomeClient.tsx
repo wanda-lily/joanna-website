@@ -94,12 +94,12 @@ export default function HomeClient({ travel }: { travel: React.ReactNode }) {
       >
         <div className="relative h-28 w-28 mt-space-lg overflow-hidden rounded-full ring-2 ring-card">
           <Image
-            src="/joanna.png"
+            src="/joanna.jpeg"
             alt="joanna picture"
             fill
             sizes="300px"
             priority
-            className="object-cover object-top"
+            className="object-cover"
           />
         </div>
 
@@ -121,8 +121,6 @@ export default function HomeClient({ travel }: { travel: React.ReactNode }) {
             <h2 className="text-body font-medium tracking-tight text-foreground">
               About
             </h2>
-
-            <span className="text-caption text-muted-foreground">01</span>
           </div>
 
           <CardHeader className="p-0">
@@ -201,12 +199,10 @@ export default function HomeClient({ travel }: { travel: React.ReactNode }) {
           <h2 className="text-body font-medium tracking-tight text-foreground">
             Work
           </h2>
-
-          <span className="text-caption text-muted-foreground">02</span>
         </div>
 
         <div id="jobs" className="gap-4 flex flex-col">
-          <div className="border-b border-border/60 pb-space-sm w-full flex gap-4">
+          <div className="border-border/60 pb-space-sm w-full flex gap-4">
             <Image
               src="/karl_lagerfeld_logo.jpg"
               alt="Karl Lagerfeld logo"
@@ -214,6 +210,7 @@ export default function HomeClient({ travel }: { travel: React.ReactNode }) {
               height={40}
               sizes="50px"
               priority
+              className="max-w-12 max-h-12 w-auto h-auto object-contain"
             />
 
             <div>
@@ -233,6 +230,7 @@ export default function HomeClient({ travel }: { travel: React.ReactNode }) {
               height={40}
               sizes="50px"
               priority
+              className="max-w-12 max-h-12 w-auto h-auto object-contain"
             />
 
             <div>
@@ -256,8 +254,6 @@ export default function HomeClient({ travel }: { travel: React.ReactNode }) {
             <h2 className="text-body font-medium tracking-tight text-foreground">
               Travel Logs
             </h2>
-
-            <span className="text-caption text-muted-foreground">03</span>
           </div>
 
           <p className="text-pretty text-body leading-relaxed text-foreground/70">

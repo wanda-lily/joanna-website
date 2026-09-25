@@ -39,7 +39,7 @@ export default function RootLayout({
         <body className="min-h-screen flex flex-col overflow-x-hidden  pl-2 box-content max-w-4xl mx-auto">
           <ThemeProvider
             attribute="class"
-            defaultTheme="light" // Reads user's OS preference automatically
+            defaultTheme="light"
             enableSystem
             disableTransitionOnChange // Prevents layout pop/flash during rapid shifts
           >

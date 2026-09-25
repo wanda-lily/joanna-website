@@ -30,6 +30,14 @@ model Post {
   published Boolean     @default(true)
   createdAt DateTime    @default(now())
   images    PostImage[]
+
+
+  // geographic fields:
+  city        String?
+  country     String?
+  countryCode String?  
+  latitude    Float?
+  longitude   Float?
 }
 
 model PostImage {

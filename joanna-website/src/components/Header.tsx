@@ -8,7 +8,7 @@ const navItems = [
   { href: "/work", label: "Work" },
 ]
 
-function Header(props) {
+function Header(props: { section: string }) {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background">
       <div className="flex h-14 items-center justify-between px-space-md">

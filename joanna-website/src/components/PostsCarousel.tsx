@@ -32,7 +32,7 @@ interface PostsCarouselProps {
 export function PostsCarousel({ posts, section }: PostsCarouselProps) {
   if (posts.length < 1) {
     return (
-      <Card className="mx-auto mt-10 flex h-60 w-140 items-center justify-center rounded-md  bg-card text-sm text-muted-foreground">
+      <Card className="mx-aut flex h-60 w-full items-center justify-center rounded-md  bg-card text-sm text-muted-foreground">
         <p>No {section} posts available.</p>
       </Card>
     )
@@ -47,7 +47,10 @@ export function PostsCarousel({ posts, section }: PostsCarouselProps) {
     >
       <CarouselContent>
         {posts.map((item) => (
-          <CarouselItem key={item.id} className="basis-full">
+          <CarouselItem
+            key={item.id}
+            className="basis-full lg:basis-1/3 md:basis-1/3"
+          >
             <Link
               href={`/${section.toLowerCase()}/${item.id}`}
               className="group block focus:outline-none"

@@ -47,7 +47,7 @@ export default function NewPostPage() {
 
         <input type="hidden" name="section" value={section} />
 
-        <Select onValueChange={setSection} required>
+        <Select value={section} onValueChange={setSection} required>
           <SelectTrigger>
             <SelectValue placeholder="Choose a section" />
           </SelectTrigger>
@@ -61,6 +61,31 @@ export default function NewPostPage() {
             <SelectItem value="RECOMMENDATIONS">Recommendations</SelectItem>
           </SelectContent>
         </Select>
+
+        {section === "TRAVEL" && (
+          <div className="grid grid-cols-2 gap-4 animate-in fade-in duration-200">
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground block mb-1">
+                City
+              </label>
+              <Input
+                name="city"
+                placeholder="e.g. Toronto"
+                required={section === "TRAVEL"}
+              />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground block mb-1">
+                Country
+              </label>
+              <Input
+                name="country"
+                placeholder="e.g. Canada"
+                required={section === "TRAVEL"}
+              />
+            </div>
+          </div>
+        )}
 
         <Textarea
           name="body"

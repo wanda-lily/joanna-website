@@ -52,6 +52,13 @@ export async function createPost(
     const body = formData.get("body") as string
     const section = formData.get("section") as Section
 
+    console.log("CREATE POST:", {
+      title,
+      section,
+      city: formData.get("city"),
+      country: formData.get("country"),
+    })
+
     const baseSlug = title
       .toLowerCase()
       .trim()
@@ -60,6 +67,68 @@ export async function createPost(
       .replace(/-+/g, "-")
 
     const slug = `${baseSlug}-${Date.now().toString(36)}`
+
+    let geoData: {
+      city: string | null
+      country: string | null
+      countryCode: string | null
+      latitude: number | null
+      longitude: number | null
+    } = {
+      city: null,
+      country: null,
+      countryCode: null,
+      latitude: null,
+      longitude: null,
+    }
+    // If it's a travel post, fetch geocoding data on the server
+    if (section === "TRAVEL") {
+      const city = formData.get("city") as string
+      const country = formData.get("country") as string
+
+      try {
+        const url =
+          `https://api.geoapify.com/v1/geocode/search` +
+          `?text=${encodeURIComponent(`${city}, ${country}`)}` +
+          `&format=json` +
+          `&limit=1` +
+          `&apiKey=${process.env.GEOAPIFY_KEY}`
+
+        const response = await fetch(url)
+        if (!response.ok) {
+          const errorText = await response.text()
+
+          console.error("Geoapify HTTP error:", {
+            status: response.status,
+            body: errorText,
+          })
+
+          throw new Error(`Geoapify returned ${response.status}`)
+        }
+        const data = (await response.json()) as any
+        console.log("APIFY DATA:", data)
+
+        if (data && data.results && data.results.length > 0) {
+          const result = data.results[0]
+
+          geoData = {
+            city: city,
+            country: country,
+            countryCode: result.country_code?.toUpperCase() || null,
+            latitude: parseFloat(result.lat),
+            longitude: parseFloat(result.lon),
+          }
+
+          console.log("GEOAPIFY RESULT:", result)
+        }
+      } catch (err) {
+        console.error("Geocoding failed:", err)
+        return {
+          success: false,
+          error: "Could not locate the city and country provided.",
+        }
+      }
+    }
 
     const images: { url: string; altText: string }[] = []
 
@@ -81,6 +150,7 @@ export async function createPost(
         body,
         slug,
         section,
+        ...geoData,
         images: {
           create: images.map((img, idx) => ({
             url: img.url,
