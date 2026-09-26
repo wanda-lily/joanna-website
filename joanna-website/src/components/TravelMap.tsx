@@ -71,7 +71,7 @@ export default function TravelMap({ posts }: TravelMapProps) {
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    fill={isVisited ? "#171717" : "#f6f2e9"}
+                    fill={isVisited ? "#C28B2D" : "#f6f2e9"}
                     className={
                       isVisited
                         ? "cursor-pointer outline-none hover:fill-neutral-700"
@@ -115,14 +115,11 @@ export default function TravelMap({ posts }: TravelMapProps) {
             top: cardPosition?.y,
           }}
         >
-          <div className="mb-3 flex items-start justify-between">
+          <div className="mb-2 flex items-start justify-between">
             <div>
-              <h3 className="font-medium">{selectedPosts[0].country}</h3>
-
-              <p className="text-sm text-neutral-500">
-                {selectedPosts.length}{" "}
-                {selectedPosts.length === 1 ? "place" : "places"}
-              </p>
+              <h3 className="text-body font-medium ">
+                {`${selectedPosts[0].country} (${selectedPosts.length}) `}
+              </h3>
             </div>
             <button
               type="button"
@@ -133,12 +130,12 @@ export default function TravelMap({ posts }: TravelMapProps) {
             </button>
           </div>
 
-          <div className="space-y-1">
+          <div className="space-y-1 border-t pt-2">
             {selectedPosts.map((post) => (
               <Link
                 key={post.id}
                 href={`/travel/${post.id}`}
-                className="block rounded-lg px-3 py-2 hover:bg-neutral-100"
+                className="text-sm text-muted-foreground block rounded-md  hover:underline"
               >
                 {post.city}
               </Link>

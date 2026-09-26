@@ -56,7 +56,7 @@ export function ImageUploadFields() {
 
           // Append instead of replacing previous uploads.
           const newImages = res.map((file) => ({
-            url: file.url,
+            url: file.ufsUrl,
             altText: "",
           }))
 

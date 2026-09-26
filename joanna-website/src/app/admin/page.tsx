@@ -10,7 +10,7 @@ import Header from "@/components/Header"
 
 export default function AdminDashboard() {
   return (
-    <div className="max-w-xl mx-auto p-8 space-y-4">
+    <div className="max-w-4xl min-h-dvh mx-auto px-auto space-y-4">
       <Header section={"Admin"} />
 
       <Card className=" rounded-md">

@@ -3,7 +3,7 @@
 import { getPrisma } from "@/lib/prisma"
 import { Section } from "@prisma/client"
 import { auth } from "@clerk/nextjs/server"
-import { redirect } from "next/navigation"
+import { revalidatePath } from "next/cache"
 import { UTApi } from "uploadthing/server"
 
 const prisma = await getPrisma()
@@ -21,12 +21,10 @@ export type PostActionState =
       error: string
     }
 
-export type CreatePostActionState =
+export type DeletePostActionState =
   | null
   | {
       success: true
-      section: Section
-      slug: string
     }
   | {
       success: false
@@ -34,9 +32,9 @@ export type CreatePostActionState =
     }
 
 export async function createPost(
-  _prevState: CreatePostActionState,
+  _prevState: PostActionState,
   formData: FormData,
-): Promise<CreatePostActionState & { slug?: string }> {
+): Promise<PostActionState & { slug?: string }> {
   const { userId } = await auth()
 
   if (!userId) {
@@ -143,7 +141,7 @@ export async function createPost(
       i++
     }
 
-    await prisma.post.create({
+    const post = await prisma.post.create({
       data: {
         title,
         subtitle,
@@ -165,6 +163,7 @@ export async function createPost(
       success: true,
       slug,
       section,
+      postId: post.id,
     }
   } catch (error) {
     console.error("createPost error:", error)
@@ -176,18 +175,43 @@ export async function createPost(
   }
 }
 
-export async function deletePost(postId: string) {
+export async function deletePost(
+  _prevState: DeletePostActionState,
+  formData: FormData,
+): Promise<DeletePostActionState> {
   const { userId } = await auth()
 
   if (!userId) {
-    throw new Error("Unauthorized")
+    return {
+      success: false,
+      error: "Unauthorized",
+    }
   }
 
-  await prisma.post.delete({
-    where: { id: postId },
-  })
+  const postId = formData.get("postId")
 
-  redirect("/admin/posts")
+  if (typeof postId !== "string") {
+    return {
+      success: false,
+      error: "Invalid post ID",
+    }
+  }
+
+  try {
+    await prisma.post.delete({
+      where: { id: postId },
+    })
+    revalidatePath("/admin/posts")
+
+    return {
+      success: true,
+    }
+  } catch (error) {
+    return {
+      success: false,
+      error: "Failed to delete post",
+    }
+  }
 }
 
 export async function updatePost(
@@ -209,6 +233,8 @@ export async function updatePost(
     const subtitle = formData.get("subtitle") as string
     const body = formData.get("body") as string
     const section = formData.get("section") as Section
+    const city = formData.get("city") as string
+    const country = formData.get("country") as string
 
     const newImages: { url: string; altText: string }[] = []
 
@@ -230,6 +256,8 @@ export async function updatePost(
         subtitle,
         body,
         section,
+        city,
+        country,
 
         ...(newImages.length > 0 && {
           images: {

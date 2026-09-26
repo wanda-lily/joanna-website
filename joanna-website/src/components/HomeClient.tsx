@@ -105,7 +105,13 @@ export default function HomeClient({ travel }: { travel: React.ReactNode }) {
 
         <div className="text-center mt-space-md flex items-center">
           <h1 className="text-h2 font-medium tracking-tight text-foreground">
-            {userId ? <Link href="/admin">Joanna</Link> : "Joanna"}
+            {userId ? (
+              <Link href="/admin" className="hover:underline">
+                Joanna
+              </Link>
+            ) : (
+              "Joanna"
+            )}
           </h1>
 
           <HugeiconsIcon
@@ -117,7 +123,7 @@ export default function HomeClient({ travel }: { travel: React.ReactNode }) {
 
         {/* About */}
         <Card className="w-full bg-transparent rounded-none! shadow-none border-t mt-space-lg p-0!">
-          <div className="flex items-baseline justify-between mb-space-md">
+          <div className="flex items-baseline justify-between">
             <h2 className="text-body font-medium tracking-tight text-foreground">
               About
             </h2>
@@ -126,7 +132,8 @@ export default function HomeClient({ travel }: { travel: React.ReactNode }) {
           <CardHeader className="p-0">
             <div className="text-body leading-relaxed text-pretty text-foreground/80">
               I love life's clichés: coffee shop corners, bookstores, seat 37A,
-              and The Beatles. Somewhere in between,
+              and The Beatles. Somewhere in between, I build things for the
+              internet.
               <Accordion
                 type="single"
                 collapsible
@@ -141,48 +148,42 @@ export default function HomeClient({ travel }: { travel: React.ReactNode }) {
                   className="border-none rounded-xl data-[state=open]:bg-transparent duration-300 scroll-mt-20"
                 >
                   <AccordionTrigger className="p-0! font-normal text-foreground/80 hover:text-foreground transition-colors cursor-pointer">
-                    <span className="text-body">
-                      I build things for the internet.
-                    </span>
+                    <h3 className="text-body font-medium tracking-tight text-foreground">
+                      Somewhere in between
+                    </h3>
                   </AccordionTrigger>
 
                   <AccordionContent className="pt-space-lg">
                     <div className="px-space-md pb-space-lg pt-space-sm">
-                      <div className="mt-space-md space-y-space-lg">
-                        <h3 className="text-body font-medium tracking-tight text-foreground">
-                          Somewhere in between
-                        </h3>
+                      <div className="max-w-2xl text-body text-pretty text-foreground/80">
+                        <p>
+                          I spend a lot of my life somewhere in between things.
+                          Between books and boarding gates. Between creative
+                          ideas and the systems that bring them to life. Between
+                          enjoying the internet and occasionally wondering why
+                          it stopped working.
+                        </p>
 
-                        <div className="max-w-2xl text-body text-pretty text-foreground/80 space-y-space-md">
-                          <p>
-                            I spend a lot of my life somewhere in between
-                            things. Between books and boarding gates. Between
-                            creative ideas and the systems that bring them to
-                            life. Between enjoying the internet and occasionally
-                            wondering why it stopped working.
-                          </p>
+                        <p>
+                          I love life's clichés: coffee shop corners,
+                          bookstores, seat 37A, and The Beatles. I can happily
+                          spend an afternoon reading, an evening talking about a
+                          book on FaceTime with a friend, and far too much time
+                          planning where to travel next.
+                        </p>
 
-                          <p>
-                            I love life's clichés: coffee shop corners,
-                            bookstores, seat 37A, and The Beatles. I can happily
-                            spend an afternoon reading, an evening talking about
-                            a book on FaceTime with a friend, and far too much
-                            time planning where to travel next.
-                          </p>
+                        <p>
+                          Professionally, I build things for the internet. Over
+                          the last few years, I've worked on digital campaigns
+                          and website experiences for Calvin Klein and Karl
+                          Lagerfeld. Launching pages, improving systems,
+                          testing, troubleshooting, and learning that the web
+                          has a sense of humour.
+                        </p>
 
-                          <p>
-                            Professionally, I build things for the internet.
-                            Over the last few years, I've worked on digital
-                            campaigns and website experiences for Calvin Klein
-                            and Karl Lagerfeld. Launching pages, improving
-                            systems, testing, troubleshooting, and learning that
-                            the web has a sense of humour.
-                          </p>
-
-                          <p className="font-medium text-foreground">
-                            This little corner of it is mine.
-                          </p>
-                        </div>
+                        <p className="font-medium text-foreground">
+                          This little corner of it is mine.
+                        </p>
                       </div>
                     </div>
                   </AccordionContent>

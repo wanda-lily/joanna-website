@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 
 import { updatePost } from "@/lib/actions"
 
+import { ImageUploadFields } from "@/components/ImageUpload"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -16,8 +17,17 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
-import type { Post, PostImage, Section } from "@prisma/client"
+import type { Post, PostImage, Section } from "@/generated/prisma/client"
 
 export function EditPostForm({
   post,
@@ -29,6 +39,7 @@ export function EditPostForm({
   const router = useRouter()
 
   const updatePostWithId = updatePost.bind(null, post.id)
+  const [open, setOpen] = useState(false)
 
   const [state, formAction, pending] = useActionState(updatePostWithId, null)
 
@@ -36,26 +47,54 @@ export function EditPostForm({
     if (!state) return
 
     if (state.success) {
-      toast.success("Changes saved", {
-        description: "Your post has been updated successfully.",
-      })
+      toast.success("Your post has been updated successfully.")
+      setOpen(false)
 
       router.push(`/admin`)
     } else {
       toast.error("Save failed", {
         description: state.error,
       })
+      setOpen(false)
     }
   }, [state, router, toast])
 
   return (
-    <form action={formAction} className="max-w-2xl mx-auto space-y-4 p-8">
-      <Input name="title" defaultValue={post.title} required />
-
-      <Input name="subtitle" defaultValue={post.subtitle} />
-
+    <form
+      action={formAction}
+      id="edit-post-form"
+      className="max-w-7xl mx-auto space-y-4 p-8"
+    >
+      <label
+        className="text-body font-semibold text-muted-foreground block mb-1"
+        htmlFor="title"
+      >
+        Title
+      </label>
+      <Input
+        name="title"
+        placeholder="Title"
+        defaultValue={post.title}
+        required
+      />
+      <label
+        className="text-body font-semibold text-muted-foreground block mb-1"
+        htmlFor="subtitle"
+      >
+        Subtitle
+      </label>
+      <Input
+        name="subtitle"
+        placeholder="Subtitle"
+        defaultValue={post.subtitle}
+      />
+      <label
+        className="text-body font-semibold text-muted-foreground block mb-1"
+        htmlFor="section"
+      >
+        Section
+      </label>
       <input type="hidden" name="section" value={section} />
-
       <Select value={section} onValueChange={(v) => setSection(v as Section)}>
         <SelectTrigger>
           <SelectValue />
@@ -70,14 +109,71 @@ export function EditPostForm({
           <SelectItem value="RECOMMENDATIONS">Recommendations</SelectItem>
         </SelectContent>
       </Select>
+      {section === "TRAVEL" && (
+        <div className="grid grid-cols-2 gap-4 animate-in fade-in duration-200">
+          <div>
+            <label className="text-body font-semibold text-muted-foreground block mb-1">
+              City
+            </label>
+            <Input
+              name="city"
+              placeholder="e.g. Toronto"
+              defaultValue={post.city ?? ""}
+              required={section === "TRAVEL"}
+            />
+          </div>
+          <div>
+            <label className="text-body font-semibold text-muted-foreground block mb-1">
+              Country
+            </label>
+            <Input
+              name="country"
+              placeholder="e.g. Canada"
+              defaultValue={post.country ?? ""}
+              required={section === "TRAVEL"}
+            />
+          </div>
+        </div>
+      )}
 
-      <Textarea name="body" defaultValue={post.body} required rows={20} />
+      <label
+        className="text-body font-semibold text-muted-foreground block mb-1"
+        htmlFor="body"
+      >
+        Content
+      </label>
+      <Textarea
+        name="body"
+        className="min-h-125"
+        placeholder="Write something..."
+        defaultValue={post.body}
+        required
+        rows={50}
+      />
+      <ImageUploadFields />
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button variant="default" type="button">
+            Save Changes
+          </Button>
+        </DialogTrigger>
 
-      {/* Images go here */}
+        <DialogContent className="sm:max-w-sm bg-background rounded-md">
+          <DialogHeader>
+            <DialogTitle>Update post?</DialogTitle>
+            <DialogDescription>
+              This action cannot be undone. This will permanently update your
+              post.
+            </DialogDescription>
+          </DialogHeader>
 
-      <Button type="submit" disabled={pending}>
-        {pending ? "Saving..." : "Save changes"}
-      </Button>
+          <DialogFooter>
+            <Button type="submit" form="edit-post-form" disabled={pending}>
+              {pending ? "Saving..." : "Save changes"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </form>
   )
 }

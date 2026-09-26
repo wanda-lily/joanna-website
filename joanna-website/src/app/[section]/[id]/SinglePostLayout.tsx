@@ -36,14 +36,9 @@ export default function SinglePostLayout({
   const sectionSlug = post.section.toLowerCase()
 
   return (
-    <div className="w-full max-w-4xl mx-auto flex flex-col items-center">
+    <div className="w-full min-h-dvh max-w-4xl mx-auto flex flex-col items-center">
+      <Header section={post.title} />
       <Card className="w-full bg-transparent border-0 shadow-none ring-0">
-        <CardHeader className="text-center">
-          <CardTitle className="text-h2 font-bold tracking-tight mb-2">
-            <Header section={post.title} />
-          </CardTitle>
-        </CardHeader>
-
         {/* Layout container optimized for responsiveness */}
         <CardContent className="flex flex-col md:flex-row gap-8 mt-4 items-start">
           {/* Left Column: Post Body Content Text */}
