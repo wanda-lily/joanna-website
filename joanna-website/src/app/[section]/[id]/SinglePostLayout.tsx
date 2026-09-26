@@ -1,13 +1,15 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+
 import Link from "next/link"
 import Image from "next/image"
 import { HugeiconsIcon } from "@hugeicons/react"
@@ -35,97 +37,153 @@ export default function SinglePostLayout({
 }: SinglePostLayoutProps) {
   const sectionSlug = post.section.toLowerCase()
 
+  const carousel = (
+    <Carousel
+      opts={{
+        align: "start",
+        loop: post.images.length > 1,
+      }}
+      className="w-full transition-transform duration-300 hover:scale-102"
+    >
+      <CarouselContent>
+        {post.images.map((image, index) => (
+          <CarouselItem key={image.id}>
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-muted sm:aspect-[3/4] md:aspect-[2/3]">
+              <Image
+                src={image.url}
+                alt={`${post.title} gallery image ${index + 1}`}
+                fill
+                priority={index === 0}
+                sizes="(max-width: 767px) 100vw, 45vw"
+                className="object-cover"
+              />
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+
+      {post.images.length > 1 && (
+        <>
+          <CarouselPrevious className="left-3" />
+          <CarouselNext className="right-3" />
+        </>
+      )}
+    </Carousel>
+  )
+  const paragraphs = post.body
+    .trim()
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.replace(/\s*\n\s*/g, " ").trim())
+    .filter(Boolean)
+
   return (
-    <div className="w-full min-h-dvh max-w-4xl mx-auto flex flex-col items-center">
-      <Header section={post.title} />
-      <Card className="w-full bg-transparent border-0 shadow-none ring-0">
-        {/* Layout container optimized for responsiveness */}
-        <CardContent className="flex flex-col md:flex-row gap-8 mt-4 items-start">
-          {/* Left Column: Post Body Content Text */}
-          <div className="flex-1 text-body text-pretty text-gray-800 leading-relaxed text-left tracking-wide whitespace-pre-line">
-            {post.body}
-          </div>
+    <div className="min-h-dvh w-full">
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+        <Header section={post.title} />
 
-          {/* Right Column: Dynamic Image Grid */}
-          <div className="flex-1 w-full grid grid-cols-2 gap-4">
-            {post.images.map((image, index) => (
-              <div
-                key={image.id}
-                /* First image spans across both columns, subsequent ones sit side-by-side */
-                className={`relative overflow-hidden rounded-md bg-muted ${
-                  index === 0 ? "col-span-2 h-200" : "col-span-1 h-100"
-                }`}
-              >
-                <Image
-                  src={image.url}
-                  alt={`${post.title} gallery image ${index + 1}`}
-                  fill
-                  priority={index === 0}
-                  className="object-cover transition-transform duration-300 hover:scale-102"
-                />
+        <Card className="w-full border-0 bg-transparent shadow-none ring-0">
+          <CardContent className="mt-6 p-0">
+            {/* =====================================================
+                MOBILE
+                Text first, image underneath
+            ===================================================== */}
+            <div className="md:hidden">
+              <div className="text-body text-pretty leading-relaxed text-gray-800 whitespace-pre-line">
+                {paragraphs.map((paragraph, index) => (
+                  <p key={index} className={index > 0 ? "mt-6" : undefined}>
+                    {paragraph}
+                  </p>
+                ))}
               </div>
-            ))}
-          </div>
-        </CardContent>
-        <CardFooter />
-      </Card>
 
-      {/* Navigation Footer Row */}
-      <div
-        id="buttons"
-        className="flex justify-center gap-12 mt-10 border-t pt-6 w-full max-w-md"
-      >
-        {/* Previous Button Link Element */}
-        {prevId ? (
-          <Link href={`/${sectionSlug}/${prevId}`} passHref>
-            <Button
-              variant="link"
-              className="gap-2 text-gray-600 hover:text-black transition-colors"
-            >
+              {post.images.length > 0 && (
+                <div className="mt-8 w-full">{carousel}</div>
+              )}
+            </div>
+
+            {/* =====================================================
+                DESKTOP
+                Image floats right and text wraps around it
+            ===================================================== */}
+            <div className="hidden md:block">
+              {post.images.length > 0 && (
+                <div className="float-right mb-6 ml-10 w-[48%] lg:w-[45%]">
+                  {carousel}
+                </div>
+              )}
+
+              <div className="text-body leading-relaxed text-gray-800 whitespace-pre-line">
+                {paragraphs.map((paragraph, index) => (
+                  <p key={index} className={index > 0 ? "mt-6" : undefined}>
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+
+              {/* Clears the float so navigation/content below
+                  doesn't accidentally flow beside the image */}
+              <div className="clear-both" />
+            </div>
+          </CardContent>
+
+          <CardFooter />
+        </Card>
+
+        {/* Navigation */}
+        <div
+          id="buttons"
+          className="mx-auto flex w-full max-w-md items-center justify-between border-t   sm:justify-center sm:gap-12"
+        >
+          {prevId ? (
+            <Link href={`/${sectionSlug}/${prevId}`}>
+              <Button
+                variant="link"
+                className="gap-2 px-2 text-gray-600 transition-colors hover:text-black"
+              >
+                <HugeiconsIcon
+                  icon={ArrowLeftDoubleIcon}
+                  strokeWidth={2}
+                  className="h-4 w-4 shrink-0"
+                />
+                Previous
+              </Button>
+            </Link>
+          ) : (
+            <Button variant="link" disabled className="gap-2 px-2 opacity-30">
               <HugeiconsIcon
                 icon={ArrowLeftDoubleIcon}
                 strokeWidth={2}
-                className="pointer-events-none shrink-0 h-4 w-4"
+                className="h-4 w-4"
               />
               Previous
             </Button>
-          </Link>
-        ) : (
-          <Button variant="link" disabled className="gap-2 opacity-30">
-            <HugeiconsIcon
-              icon={ArrowLeftDoubleIcon}
-              strokeWidth={2}
-              className="h-4 w-4"
-            />
-            Previous
-          </Button>
-        )}
+          )}
 
-        {/* Next Button Link Element */}
-        {nextId ? (
-          <Link href={`/${sectionSlug}/${nextId}`} passHref>
-            <Button
-              variant="link"
-              className="gap-2 text-gray-600 hover:text-black transition-colors"
-            >
+          {nextId ? (
+            <Link href={`/${sectionSlug}/${nextId}`}>
+              <Button
+                variant="link"
+                className="gap-2 px-2 text-gray-600 transition-colors hover:text-black"
+              >
+                Next
+                <HugeiconsIcon
+                  icon={ArrowRightDoubleIcon}
+                  strokeWidth={2}
+                  className="h-4 w-4 shrink-0"
+                />
+              </Button>
+            </Link>
+          ) : (
+            <Button variant="link" disabled className="gap-2 px-2 opacity-30">
               Next
               <HugeiconsIcon
                 icon={ArrowRightDoubleIcon}
                 strokeWidth={2}
-                className="pointer-events-none shrink-0 h-4 w-4"
+                className="h-4 w-4"
               />
             </Button>
-          </Link>
-        ) : (
-          <Button variant="link" disabled className="gap-2 opacity-30">
-            Next
-            <HugeiconsIcon
-              icon={ArrowRightDoubleIcon}
-              strokeWidth={2}
-              className="h-4 w-4"
-            />
-          </Button>
-        )}
+          )}
+        </div>
       </div>
     </div>
   )

@@ -151,6 +151,10 @@ export function EditPostForm({
         rows={50}
       />
       <ImageUploadFields />
+      <p className="w-full text-xs text-muted-foreground text-center">
+        JPEG, PNG, or WebP recommended. If using an iPhone, please convert HEIC
+        photos to JPEG or WebP before uploading.
+      </p>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button variant="default" type="button">

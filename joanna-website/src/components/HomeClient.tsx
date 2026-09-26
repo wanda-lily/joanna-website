@@ -12,7 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardHeader } from "@/components/ui/card"
 
 const sections = [
   {
