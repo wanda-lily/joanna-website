@@ -5,6 +5,7 @@ import Header from "@/components/Header"
 const prisma = await getPrisma()
 export default async function AdminPostsPage() {
   const posts = await prisma.post.findMany({
+    where: { published: true },
     orderBy: { createdAt: "desc" },
   })
 

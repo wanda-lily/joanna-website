@@ -31,6 +31,7 @@ export default async function DynamicPostPage({ params }: PageProps) {
   // 2. Query for the previous post in the same section
   const prevPost = await prisma.post.findFirst({
     where: {
+      published: true,
       section: upperSection,
       createdAt: { lt: currentPost.createdAt }, // Assumes chronological sorting
     },

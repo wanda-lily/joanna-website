@@ -26,7 +26,7 @@ async function TravelPost() {
       {/* Header sections text centered */}
       <div className="text-center w-full max-w-xl">
         <h2 className="text-h3 font-bold tracking-tight">Travel Logs</h2>
-        <p className="text-pretty mt-4 text-gray-600 text-body">
+        <p className="text-pretty mt-4 pb-10 text-gray-600 text-body">
           A collection of places I have been, things I've noticed, and photos I
           wanted to keep.
         </p>

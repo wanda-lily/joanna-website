@@ -27,7 +27,7 @@ model Post {
   slug      String      @unique
   section   Section
   body      String
-  published Boolean     @default(true)
+  published Boolean     @default(false)
   createdAt DateTime    @default(now())
   images    PostImage[]
 

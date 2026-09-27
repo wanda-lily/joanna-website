@@ -57,17 +57,14 @@ function PostList({ posts = [] }: PostProps) {
             <CarouselItem key={item.id}>
               <Card className="rounded-md!">
                 <CardHeader>
-                  <CardTitle>
-                    <Button variant="link" asChild>
-                      <Link href={`/admin/edit/${item.slug}`}>
-                        {item.title}
-                      </Link>
-                    </Button>
-                  </CardTitle>
+                  <CardTitle>{item.title}</CardTitle>
                   <CardAction>
+                    <Button variant="default" asChild className="mr-4">
+                      <Link href={`/admin/edit/${item.slug}`}>Edit</Link>
+                    </Button>
                     <Dialog open={open} onOpenChange={setOpen}>
                       <DialogTrigger asChild>
-                        <Button variant="outline">Delete</Button>
+                        <Button variant="destructive">Delete</Button>
                       </DialogTrigger>
 
                       <DialogContent className="sm:max-w-sm bg-background rounded-md">

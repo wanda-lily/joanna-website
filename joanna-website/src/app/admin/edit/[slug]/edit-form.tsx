@@ -9,6 +9,7 @@ import { ImageUploadFields } from "@/components/ImageUpload"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { Checkbox } from "@/components/ui/checkbox"
 import { toast } from "sonner"
 import {
   Select,
@@ -88,27 +89,54 @@ export function EditPostForm({
         placeholder="Subtitle"
         defaultValue={post.subtitle}
       />
-      <label
-        className="text-body font-semibold text-muted-foreground block mb-1"
-        htmlFor="section"
-      >
-        Section
-      </label>
-      <input type="hidden" name="section" value={section} />
-      <Select value={section} onValueChange={(v) => setSection(v as Section)}>
-        <SelectTrigger>
-          <SelectValue />
-        </SelectTrigger>
 
-        <SelectContent>
-          <SelectItem value="WORK">Work</SelectItem>
-          <SelectItem value="TRAVEL">Travel</SelectItem>
-          <SelectItem value="BOOKS">Books</SelectItem>
-          <SelectItem value="TIW">Things I wrote</SelectItem>
-          <SelectItem value="CURRENT">Currently</SelectItem>
-          <SelectItem value="RECOMMENDATIONS">Recommendations</SelectItem>
-        </SelectContent>
-      </Select>
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label
+            className="text-body font-semibold text-muted-foreground block mb-1"
+            htmlFor="published-checkbox"
+          >
+            Publish
+          </label>
+          <div className="border h-9 bg-input/30 rounded-4xl">
+            <Checkbox
+              id="published-checkbox"
+              name="published-checkbox"
+              defaultChecked={post.published}
+              className="w-full h-full rounded-4xl"
+            />
+          </div>
+        </div>
+
+        {/* section select */}
+        <div>
+          <label
+            className="text-body font-semibold text-muted-foreground block mb-1"
+            htmlFor="section"
+          >
+            Section
+          </label>
+          <Input type="hidden" name="section" value={section} />
+          <Select
+            value={section}
+            onValueChange={(v) => setSection(v as Section)}
+          >
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+
+            <SelectContent>
+              <SelectItem value="WORK">Work</SelectItem>
+              <SelectItem value="TRAVEL">Travel</SelectItem>
+              <SelectItem value="BOOKS">Books</SelectItem>
+              <SelectItem value="TIW">Things I wrote</SelectItem>
+              <SelectItem value="CURRENT">Currently</SelectItem>
+              <SelectItem value="RECOMMENDATIONS">Recommendations</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
       {section === "TRAVEL" && (
         <div className="grid grid-cols-2 gap-4 animate-in fade-in duration-200">
           <div>

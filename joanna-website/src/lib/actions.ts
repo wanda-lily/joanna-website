@@ -49,6 +49,7 @@ export async function createPost(
     const subtitle = formData.get("subtitle") as string
     const body = formData.get("body") as string
     const section = formData.get("section") as Section
+    const published = formData.get("published") === "on"
 
     console.log("CREATE POST:", {
       title,
@@ -148,6 +149,7 @@ export async function createPost(
         body,
         slug,
         section,
+        published,
         ...geoData,
         images: {
           create: images.map((img, idx) => ({
@@ -235,6 +237,7 @@ export async function updatePost(
     const section = formData.get("section") as Section
     const city = formData.get("city") as string
     const country = formData.get("country") as string
+    const published = formData.get("published") === "on"
 
     const newImages: { url: string; altText: string }[] = []
 
@@ -258,6 +261,7 @@ export async function updatePost(
         section,
         city,
         country,
+        published,
 
         ...(newImages.length > 0 && {
           images: {

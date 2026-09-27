@@ -15,6 +15,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   Dialog,
   DialogContent,
@@ -62,7 +63,6 @@ export default function NewPostPage() {
           Title
         </label>
         <Input name="title" placeholder="Title" required />
-
         <label
           className="text-body font-semibold text-muted-foreground block mb-1"
           htmlFor="subtitle"
@@ -71,29 +71,47 @@ export default function NewPostPage() {
         </label>
         <Input name="subtitle" placeholder="Subtitle" />
 
-        <label
-          className="text-body font-semibold text-muted-foreground block mb-1"
-          htmlFor="section"
-        >
-          Section
-        </label>
-        <input type="hidden" name="section" value={section} />
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label
+              className="text-body font-semibold text-muted-foreground block mb-1"
+              htmlFor="published-checkbox"
+            >
+              Show on Website
+            </label>
+            <div className="border h-9 bg-input/30 rounded-4xl">
+              <Checkbox
+                id="published-checkbox"
+                name="published-checkbox"
+                className="w-full h-full rounded-4xl"
+              />
+            </div>
+          </div>
 
-        <Select value={section} onValueChange={setSection} required>
-          <SelectTrigger>
-            <SelectValue placeholder="Choose a section" />
-          </SelectTrigger>
+          <div>
+            <label
+              className="text-body font-semibold text-muted-foreground block mb-1"
+              htmlFor="section"
+            >
+              Section
+            </label>
+            <input type="hidden" name="section" value={section} />
+            <Select value={section} onValueChange={setSection} required>
+              <SelectTrigger className="w-full!">
+                <SelectValue placeholder="Choose a section" />
+              </SelectTrigger>
 
-          <SelectContent>
-            <SelectItem value="WORK">Work</SelectItem>
-            <SelectItem value="TRAVEL">Travel</SelectItem>
-            <SelectItem value="BOOKS">Books</SelectItem>
-            <SelectItem value="TIW">Things I wrote</SelectItem>
-            <SelectItem value="CURRENT">Currently</SelectItem>
-            <SelectItem value="RECOMMENDATIONS">Recommendations</SelectItem>
-          </SelectContent>
-        </Select>
-
+              <SelectContent>
+                <SelectItem value="WORK">Work</SelectItem>
+                <SelectItem value="TRAVEL">Travel</SelectItem>
+                <SelectItem value="BOOKS">Books</SelectItem>
+                <SelectItem value="TIW">Things I wrote</SelectItem>
+                <SelectItem value="CURRENT">Currently</SelectItem>
+                <SelectItem value="RECOMMENDATIONS">Recommendations</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
         {section === "TRAVEL" && (
           <div className="grid grid-cols-2 gap-4 animate-in fade-in duration-200">
             <div>
@@ -118,7 +136,6 @@ export default function NewPostPage() {
             </div>
           </div>
         )}
-
         <label
           className="text-sm font-semibold text-muted-foreground block mb-1"
           htmlFor="body"
@@ -132,13 +149,11 @@ export default function NewPostPage() {
           required
           rows={50}
         />
-
         <ImageUploadFields />
         <p className="w-full text-xs text-muted-foreground text-center">
           JPEG, PNG, or WebP recommended. If using an iPhone, please convert
           HEIC photos to JPEG or WebP before uploading.
         </p>
-
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <Button variant="default" type="button">

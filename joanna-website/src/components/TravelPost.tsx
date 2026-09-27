@@ -7,6 +7,7 @@ async function TravelPost() {
   const posts = await prisma.post.findMany({
     where: {
       section: "TRAVEL",
+      published: true,
     },
     include: {
       images: {
