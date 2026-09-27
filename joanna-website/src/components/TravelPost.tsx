@@ -28,16 +28,12 @@ async function TravelPost() {
   return (
     <div className="max-w-4xl max-h-4xl mx-auto flex flex-col items-center rounded-md">
       {/* ==================Mobile: carousel==================*/}
-      {/* <div className="w-full sm:hidden">
+      <div className="w-full sm:hidden">
         <PostsCarousel posts={posts} section="travel" />
-      </div> */}
+      </div>
 
       {/*===================Desktop: interactive map===============*/}
-      {/* <div className="hidden w-full sm:block">
-        <TravelMap posts={posts} />
-      </div> */}
-
-      <div className="w-full ">
+      <div className="hidden w-full sm:block">
         <TravelMap posts={posts} />
       </div>
     </div>

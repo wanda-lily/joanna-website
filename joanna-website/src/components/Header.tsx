@@ -10,8 +10,8 @@ const navItems = [
 
 function Header(props: { section: string }) {
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background w-4xl">
-      <div className="flex h-14 items-center justify-between px-space-md">
+    <header className="sticky top-0 z-50 w-full px-4  border-b border-border bg-background">
+      <div className="flex h-14 items-center justify-between w-full">
         <Link
           href="/"
           className="flex h-9 w-9 items-center justify-center rounded-full border border-border font-semibold text-body transition-colors hover:bg-card"

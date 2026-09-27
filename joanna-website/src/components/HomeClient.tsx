@@ -132,8 +132,7 @@ export default function HomeClient({ travel }: { travel: React.ReactNode }) {
           <CardHeader className="p-0">
             <div className="text-body leading-relaxed text-pretty text-foreground/80">
               I love life's clichés: coffee shop corners, bookstores, seat 37A,
-              and The Beatles. Somewhere in between, I build things for the
-              internet.
+              and The Beatles. Somewhere in between,
               <Accordion
                 type="single"
                 collapsible
@@ -145,16 +144,19 @@ export default function HomeClient({ travel }: { travel: React.ReactNode }) {
                   ref={accordionRef}
                   id="about"
                   value="about"
-                  className="border-none rounded-xl data-[state=open]:bg-transparent duration-300 scroll-mt-20"
+                  className="border-none rounded-xl data-[state=open]:bg-transparent duration-300 scroll-mt-10"
                 >
-                  <AccordionTrigger className="p-0! font-normal text-foreground/80 hover:text-foreground transition-colors cursor-pointer">
-                    <h3 className="text-body font-medium tracking-tight text-foreground">
-                      Somewhere in between
-                    </h3>
+                  <AccordionTrigger className="p-0!  font-normal text-foreground/80 hover:text-foreground transition-colors cursor-pointer">
+                    <p className="text-body">
+                      I build things for the internet.
+                    </p>
                   </AccordionTrigger>
 
-                  <AccordionContent className="pt-space-lg">
-                    <div className="px-space-md pb-space-lg pt-space-sm">
+                  <AccordionContent>
+                    <div className="px-space-md  py-space-md">
+                      <h3 className="text-body font-medium tracking-tight text-foreground">
+                        Somewhere in between
+                      </h3>
                       <div className="max-w-2xl text-body text-pretty text-foreground/80">
                         <p>
                           I spend a lot of my life somewhere in between things.

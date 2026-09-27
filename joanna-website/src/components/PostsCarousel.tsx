@@ -19,6 +19,7 @@ interface PostImage {
 interface Post {
   id: string
   title: string
+  slug: string
   subtitle: string | null
   section: string
   images: PostImage[]
@@ -52,7 +53,7 @@ export function PostsCarousel({ posts, section }: PostsCarouselProps) {
             className="basis-full lg:basis-1/3 md:basis-1/3"
           >
             <Link
-              href={`/${section.toLowerCase()}/${item.id}`}
+              href={`/${section.toLowerCase()}/${item.slug}`}
               className="group block focus:outline-none"
             >
               <div className="h-[350px] w-full overflow-hidden rounded-md border border-border/50 bg-card/60 transition-colors duration-300 hover:-translate-y-0.5 hover:bg-card">

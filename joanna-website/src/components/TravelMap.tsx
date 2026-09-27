@@ -13,7 +13,7 @@ import { geoCentroid } from "d3-geo"
 
 type TravelPost = Pick<
   Post,
-  "id" | "city" | "country" | "countryCode" | "latitude" | "longitude"
+  "id" | "slug" | "city" | "country" | "countryCode" | "latitude" | "longitude"
 >
 
 type TravelMapProps = {
@@ -134,7 +134,7 @@ export default function TravelMap({ posts }: TravelMapProps) {
             {selectedPosts.map((post) => (
               <Link
                 key={post.id}
-                href={`/travel/${post.id}`}
+                href={`/travel/${post.slug}`}
                 className="text-sm text-muted-foreground block rounded-md  hover:underline"
               >
                 {post.city}

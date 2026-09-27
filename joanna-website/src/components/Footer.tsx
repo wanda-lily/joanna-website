@@ -22,7 +22,7 @@ function Footer() {
 
   return (
     <footer className="w-full max-w-4xl mx-auto border-t border-border  mt-auto">
-      <div className=" h-14 mx-auto px-space-md flex flex-col sm:flex-row justify-between items-center gap-space-md">
+      <div className=" h-14 mx-auto px-space-md flex flex-row justify-between items-center gap-space-md">
         <div
           id="copyright"
           className="flex items-center gap-space-sm text-caption text-muted-foreground font-medium"
@@ -30,10 +30,7 @@ function Footer() {
           <span>&copy; {currentYear} Joanna Animasaun</span>
         </div>
 
-        <div
-          id="contact"
-          className="flex items-center gap-space-md text-muted-foreground"
-        >
+        <div id="contact" className="flex items-center  text-muted-foreground">
           <Link
             href="https://www.linkedin.com/in/joanna-tumininu-animasaun-48aa561b9/"
             aria-label="LinkedIn"

@@ -26,14 +26,14 @@ type PostWithImages = Post & {
 
 type SinglePostLayoutProps = {
   post: PostWithImages
-  prevId: string | null
-  nextId: string | null
+  prevSlug: string | null
+  nextSlug: string | null
 }
 
 export default function SinglePostLayout({
   post,
-  prevId,
-  nextId,
+  prevSlug: prevSlug,
+  nextSlug: nextSlug,
 }: SinglePostLayoutProps) {
   const sectionSlug = post.section.toLowerCase()
 
@@ -48,10 +48,10 @@ export default function SinglePostLayout({
       <CarouselContent>
         {post.images.map((image, index) => (
           <CarouselItem key={image.id}>
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-muted sm:aspect-[3/4] md:aspect-[2/3]">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-md bg-muted sm:aspect-[3/4] md:aspect-[2/3]">
               <Image
                 src={image.url}
-                alt={`${post.title} gallery image ${index + 1}`}
+                alt={image.altText ?? ""}
                 fill
                 priority={index === 0}
                 sizes="(max-width: 767px) 100vw, 45vw"
@@ -77,18 +77,20 @@ export default function SinglePostLayout({
     .filter(Boolean)
 
   return (
-    <div className="min-h-dvh w-full">
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <Header section={post.title} />
-
+    <div
+      id="travel-section"
+      className="flex flex-col gap-space-xl min-h-dvh w-full"
+    >
+      <Header section={post.title} />
+      <div className=" w-full max-w-6xl px-4">
         <Card className="w-full border-0 bg-transparent shadow-none ring-0">
-          <CardContent className="mt-6 p-0">
+          <CardContent className="p-0">
             {/* =====================================================
                 MOBILE
                 Text first, image underneath
             ===================================================== */}
             <div className="md:hidden">
-              <div className="text-body text-pretty leading-relaxed text-gray-800 whitespace-pre-line">
+              <div className="text-body text-pretty leading-relaxed text-foreground/80 whitespace-pre-line">
                 {paragraphs.map((paragraph, index) => (
                   <p key={index} className={index > 0 ? "mt-6" : undefined}>
                     {paragraph}
@@ -107,12 +109,12 @@ export default function SinglePostLayout({
             ===================================================== */}
             <div className="hidden md:block">
               {post.images.length > 0 && (
-                <div className="float-right mb-6 ml-10 w-[48%] lg:w-[45%]">
+                <div className="float-right mb-6 ml-10 w-[46%] lg:w-[42%]">
                   {carousel}
                 </div>
               )}
 
-              <div className="text-body leading-relaxed text-gray-800 whitespace-pre-line">
+              <div className="text-body leading-relaxed text-foreground/80 whitespace-pre-line">
                 {paragraphs.map((paragraph, index) => (
                   <p key={index} className={index > 0 ? "mt-6" : undefined}>
                     {paragraph}
@@ -134,11 +136,11 @@ export default function SinglePostLayout({
           id="buttons"
           className="mx-auto flex w-full max-w-md items-center justify-between border-t   sm:justify-center sm:gap-12"
         >
-          {prevId ? (
-            <Link href={`/${sectionSlug}/${prevId}`}>
+          {prevSlug ? (
+            <Link href={`/${sectionSlug}/${prevSlug}`}>
               <Button
                 variant="link"
-                className="gap-2 px-2 text-gray-600 transition-colors hover:text-black"
+                className="gap-2 px-2 text-foreground/80 transition-colors hover:text-foreground"
               >
                 <HugeiconsIcon
                   icon={ArrowLeftDoubleIcon}
@@ -159,11 +161,11 @@ export default function SinglePostLayout({
             </Button>
           )}
 
-          {nextId ? (
-            <Link href={`/${sectionSlug}/${nextId}`}>
+          {nextSlug ? (
+            <Link href={`/${sectionSlug}/${nextSlug}`}>
               <Button
                 variant="link"
-                className="gap-2 px-2 text-gray-600 transition-colors hover:text-black"
+                className="gap-2 px-2 text-foreground/80 transition-colors hover:text-foreground"
               >
                 Next
                 <HugeiconsIcon

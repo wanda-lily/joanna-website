@@ -5,18 +5,18 @@ import SinglePostLayout from "./SinglePostLayout"
 interface PageProps {
   params: Promise<{
     section: string
-    id: string
+    slug: string
   }>
 }
 
 export default async function DynamicPostPage({ params }: PageProps) {
   const prisma = await getPrisma()
-  const { id, section } = await params
+  const { slug, section } = await params
   const upperSection = section.toUpperCase()
 
   // 1. Fetch the current post with its ordered images
   const currentPost = await prisma.post.findUnique({
-    where: { id },
+    where: { slug },
     include: {
       images: {
         orderBy: { order: "asc" },
@@ -35,7 +35,7 @@ export default async function DynamicPostPage({ params }: PageProps) {
       createdAt: { lt: currentPost.createdAt }, // Assumes chronological sorting
     },
     orderBy: { createdAt: "desc" },
-    select: { id: true },
+    select: { slug: true },
   })
 
   // 3. Query for the next post in the same section
@@ -45,14 +45,14 @@ export default async function DynamicPostPage({ params }: PageProps) {
       createdAt: { gt: currentPost.createdAt },
     },
     orderBy: { createdAt: "asc" },
-    select: { id: true },
+    select: { slug: true },
   })
 
   return (
     <SinglePostLayout
       post={currentPost}
-      prevId={prevPost?.id || null}
-      nextId={nextPost?.id || null}
+      prevSlug={prevPost?.slug || null}
+      nextSlug={nextPost?.slug || null}
     />
   )
 }
